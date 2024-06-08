@@ -1,1 +1,59 @@
+Create Aws Account.
+Create EC2 instances with name server1 and select t2.micro and Ubuntu os and configur the security groups.
+Connect to your EC2 instance: Use PuTTY SSH client to connect to your EC2 instance. You'll need your EC2 instance's public IP address or DNS name, along with the private key (.pem file) associated with your EC2 instance.
 
+2. Update packages: Once connected, update the package repository by running:
+   ```
+   sudo apt update
+   ```
+
+3. Install MySQL: Install MySQL server by running:
+   ```
+   sudo apt install mysql-server
+   ```
+
+4. Secure MySQL installation: Run the MySQL security script to improve the security of your MySQL installation:
+   ```
+   sudo mysql_secure_installation
+   ```
+
+5. Install Apache and PHP: Install Apache web server and PHP by running:
+   ```
+   sudo apt install apache2 php php-mysql
+   ```
+
+6. Download WordPress: Download the latest version of WordPress to your server:
+   ```
+   wget -c http://wordpress.org/latest.tar.gz
+   ```
+
+7. Extract WordPress: Extract the WordPress archive:
+   ```
+   tar -xzvf latest.tar.gz
+   ```
+
+8. Move WordPress files: Move the extracted WordPress files to the Apache web root directory:
+   ```
+   sudo mv wordpress/* /var/www/html/
+   ```
+
+9. Configure WordPress: Set up WordPress by creating the wp-config.php file:
+   ```
+   cd /var/www/html
+   sudo mv wp-config-sample.php wp-config.php
+   sudo nano wp-config.php
+   ```
+   Update the database connection settings in the wp-config.php file with your MySQL credentials.
+
+10. Set permissions: Set the appropriate permissions for WordPress files and directories:
+    ```
+    sudo chown -R www-data:www-data /var/www/html/
+    sudo chmod -R 755 /var/www/html/
+    ```
+
+11. Start Apache: Start the Apache web server:
+    ```
+    sudo service apache2 start
+    ```
+
+12. Finish WordPress installation: Open a web browser and navigate to your EC2 instance's public IP address or DNS name and login to the wordpress using the username and the password.(welcome to wordpress)
