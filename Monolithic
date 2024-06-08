@@ -1,6 +1,6 @@
 Create Aws Account.
 Create EC2 instances with name server1 and select t2.micro and Ubuntu os and configur the security groups.
-Connect to your EC2 instance: Use PuTTY SSH client to connect to your EC2 instance. You'll need your EC2 instance's public IP address or DNS name, along with the private key (.pem file) associated with your EC2 instance.
+Connect to your EC2 instance: Use PuTTY SSH client to connect to your EC2 instance. You'll need your EC2 instance's public IP address or DNS name, along with the private key (.pem file)or(.ppk file) associated with your EC2 instance.
 
 2. Update packages: Once connected, update the package repository by running:
    ```
