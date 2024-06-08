@@ -1,0 +1,76 @@
+Microserver So for WordPress and MySQL on separate EC2 instances and configure the necessary security groups:
+
+ Setting up WordPress EC2 instance:
+
+1. Launch EC2 Instance for WordPress:
+   - Choose the Ubuntu AMI.
+   - Select the t2.micro instance type.
+   - Configure the security group to allow inbound traffic on ports 22 (SSH) and 80 (HTTP).
+
+2. Connect to WordPress EC2 Instance:
+   - Use PuTTY SSH client to connect to the WordPress EC2 instance using its public IP address and the private key (.pem file).
+
+3. Install Apache and PHP:
+   ```
+   sudo apt update
+   sudo apt install apache2 php php-mysql
+   ```
+
+4. Download WordPress:
+   ```
+   wget -c http://wordpress.org/latest.tar.gz
+   tar -xzvf latest.tar.gz
+   ```
+
+5. Move WordPress files:
+   ```
+   sudo mv wordpress/* /var/www/html/
+   ```
+
+6. Set permissions:
+   ```
+   sudo chown -R www-data:www-data /var/www/html/
+   sudo chmod -R 755 /var/www/html/
+   ```
+
+7. Create MySQL Database and User for WordPress:
+   - Connect to the MySQL instance from the MySQL EC2 instance or from any other client.
+   - Create a database and a user for WordPress, granting appropriate permissions.
+
+8. Configure WordPress:
+   - Navigate to your WordPress site in a web browser.
+   - Follow the WordPress installation wizard, providing the database information created in the previous step.
+
+### Setting up MySQL EC2 instance:
+
+1. Launch EC2 Instance for MySQL:
+   - Choose the Ubuntu AMI.
+   - Select the t2.micro instance type.
+   - Configure the security group to allow inbound traffic on port 22 (SSH) from the WordPress EC2 instance.
+
+2. Connect to MySQL EC2 Instance:
+   - Use PuTTY SSH client to connect to the MySQL EC2 instance using its public IP address and the private key (.pem file).
+
+3. Install MySQL:
+   ```
+   sudo apt update
+   sudo apt install mysql-server
+   ```
+
+4. Secure MySQL installation:
+   ```
+   sudo mysql_secure_installation
+   ```
+
+### Configuring Security Groups:
+
+- Create two security groups: one for the WordPress EC2 instance and another for the MySQL EC2 instance.
+- For the WordPress security group, allow inbound traffic on port 22 (SSH) and port 80 (HTTP) from anywhere.
+- For the MySQL security group, allow inbound traffic on port 22 (SSH) from the WordPress EC2 instance only.
+
+### Creating a Welcome Page in WordPress:
+
+- Navigate to the WordPress admin dashboard (`http://your-wordpress-ip/wp-admin`).
+- Log in using the credentials you set during installation.
+- Create a new page with a title like "Welcome" and add your desired content.
+- Set this page as the homepage from the WordPress settings.
